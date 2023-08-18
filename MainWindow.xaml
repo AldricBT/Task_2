@@ -37,6 +37,7 @@
         </ComboBox>
         <Label Content="Авторизироваться как:" HorizontalAlignment="Left" Height="30" Margin="27,35,0,0" VerticalAlignment="Top" Width="140"/>
         <Button x:Name="clientView" Content="Просмотр данных клиента" HorizontalAlignment="Left" Margin="172,81,0,0" VerticalAlignment="Top" Height="28" Width="158" Click="clientView_Click"/>
+        <Label x:Name="inputMessage" Content="" HorizontalAlignment="Left" Margin="321,35,0,0" VerticalAlignment="Top" Height="30" Width="290"/>
 
     </Grid>
 </Window>

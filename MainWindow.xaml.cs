@@ -80,6 +80,7 @@ namespace Task_2
             worker.Phone = phoneEdit.Text;
             worker.Passport = passportEdit.Text;
 
+            clients.Save();
             RefreshInfo();
         }
 
@@ -89,10 +90,20 @@ namespace Task_2
             if (chooseWorker.SelectedValue.ToString() == "Консультант")
             {
                 worker = new Consultant(clients.Clients[0]);
+                lastnameEdit.IsReadOnly = true;
+                nameEdit.IsReadOnly= true;
+                patronymicEdit.IsReadOnly = true;
+                passportEdit.IsReadOnly = true;
+                inputMessage.Content = "Вы можете изменять только телефон!";                
             }
             else
             {
                 worker = new Manager(clients.Clients[0]);
+                lastnameEdit.IsReadOnly = false;
+                nameEdit.IsReadOnly = false;
+                patronymicEdit.IsReadOnly = false;
+                passportEdit.IsReadOnly = false;
+                inputMessage.Content = "";
             }
             return worker;
         }
