@@ -30,14 +30,17 @@
         <Label x:Name="passport" Content="" HorizontalAlignment="Left" Height="28" Margin="605,283,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Content="Поля для изменений" HorizontalAlignment="Left" Height="30" Margin="97,126,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Content="Информация о клиенте" HorizontalAlignment="Left" Height="30" Margin="530,126,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox x:Name="chooseWorker" HorizontalAlignment="Left" Margin="172,35,0,0" VerticalAlignment="Top" Width="144" Height="30" 
-                  SelectedIndex="1" SelectedValuePath="Name" SelectionChanged="chooseWorker_SelectionChanged" >
+        <ComboBox x:Name="chooseWorker" HorizontalAlignment="Left" Margin="198,35,0,0" VerticalAlignment="Top" Width="144" Height="30" 
+                  SelectedIndex="0" SelectedValuePath="Name" SelectionChanged="chooseWorker_SelectionChanged" >
             <TextBlock x:Name="Консультант">Консультант</TextBlock>
             <TextBlock x:Name="Менеджер">Менеджер</TextBlock>
         </ComboBox>
         <Label Content="Авторизироваться как:" HorizontalAlignment="Left" Height="30" Margin="27,35,0,0" VerticalAlignment="Top" Width="140"/>
-        <Button x:Name="clientView" Content="Просмотр данных клиента" HorizontalAlignment="Left" Margin="172,81,0,0" VerticalAlignment="Top" Height="28" Width="158" Click="clientView_Click"/>
-        <Label x:Name="inputMessage" Content="" HorizontalAlignment="Left" Margin="321,35,0,0" VerticalAlignment="Top" Height="30" Width="290"/>
+        <Label x:Name="inputMessage" Content="" HorizontalAlignment="Left" Margin="347,35,0,0" VerticalAlignment="Top" Height="30" Width="290"/>
+        <Label Content="Просмотр данных клиента:" HorizontalAlignment="Left" Height="30" Margin="27,79,0,0" VerticalAlignment="Top" Width="162"/>
+        <ComboBox x:Name="chooseClient" HorizontalAlignment="Left" Margin="198,80,0,0" VerticalAlignment="Top" Width="259" Height="30" 
+            SelectedIndex="0" SelectedValuePath="Name" SelectionChanged="chooseClient_SelectionChanged" >            
+        </ComboBox>
 
     </Grid>
 </Window>

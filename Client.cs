@@ -65,5 +65,10 @@ namespace Task_2
             this.phone = Math.Round(((rnd.NextDouble()) * 1e+11)).ToString();
             this.passport = Math.Round(((rnd.NextDouble()) * 1e+10)).ToString();
         }
+
+        public override string ToString()
+        {
+            return $"{Lastname} {Name} {Patronymic}";
+        }
     }
 }

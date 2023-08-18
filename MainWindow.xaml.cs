@@ -27,8 +27,9 @@ namespace Task_2
         public MainWindow()
         {   
             InitializeComponent();
-            clients = new RepositoryOfClients("clients.json");
+            clients = new RepositoryOfClients("clients.json");            
             clients.Load();
+            FillClientComboBox();
             RefreshInfo();
         }
 
@@ -38,12 +39,6 @@ namespace Task_2
             {
                 e.Handled = true;
             }
-        }
-
-        private void clientView_Click(object sender, RoutedEventArgs e)
-        {
-            if (clients != null)
-                RefreshInfo();
         }
 
         private void chooseWorker_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -80,6 +75,8 @@ namespace Task_2
             worker.Phone = phoneEdit.Text;
             worker.Passport = passportEdit.Text;
 
+            RefreshClientComboBox();
+
             clients.Save();
             RefreshInfo();
         }
@@ -89,7 +86,7 @@ namespace Task_2
             IWorker worker;
             if (chooseWorker.SelectedValue.ToString() == "Консультант")
             {
-                worker = new Consultant(clients.Clients[0]);
+                worker = new Consultant(clients.Clients[chooseClient.SelectedIndex]);
                 lastnameEdit.IsReadOnly = true;
                 nameEdit.IsReadOnly= true;
                 patronymicEdit.IsReadOnly = true;
@@ -98,7 +95,7 @@ namespace Task_2
             }
             else
             {
-                worker = new Manager(clients.Clients[0]);
+                worker = new Manager(clients.Clients[chooseClient.SelectedIndex]);
                 lastnameEdit.IsReadOnly = false;
                 nameEdit.IsReadOnly = false;
                 patronymicEdit.IsReadOnly = false;
@@ -106,6 +103,27 @@ namespace Task_2
                 inputMessage.Content = "";
             }
             return worker;
+        }
+
+        private void FillClientComboBox()
+        {            
+            for (int i = 0; i < clients.Clients.Count; i++)
+            {
+                chooseClient.Items.Add(clients.Clients[i]);
+            }
+        }
+
+        private void RefreshClientComboBox()
+        {
+            int index = chooseClient.SelectedIndex;
+            chooseClient.Items[index] = clients.Clients[index];
+            chooseClient.Items.Refresh();
+            chooseClient.SelectedIndex = index;
+        }
+        private void chooseClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (chooseClient.SelectedIndex != -1)
+                RefreshInfo();
         }
     }
 }

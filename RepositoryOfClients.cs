@@ -26,14 +26,24 @@ namespace Task_2
             set { clients = value; }
         }
 
+        /// <summary>
+        /// Конструктор. В случае отсутствия базы данных создает случайную
+        /// </summary>
+        /// <param name="path"></param>
         public RepositoryOfClients(string path)
         {
-            this.path = path; 
+            this.path = path;
+            this.clients = new List<Client>();
             if (File.Exists(path)) 
             { 
                 Load();
             }
-            this.clients = new List<Client>();
+            else
+            {
+                CreateRandomDB(10);
+                Save();
+            }
+            
         }
 
         /// <summary>
@@ -46,6 +56,22 @@ namespace Task_2
             int index = clients.FindIndex(c => c == clientPresent);
             if (index != -1)
                 clients[index] = clientNew;
+        }
+
+        public void CreateRandomDB(int size) 
+        {
+            Client client;
+            Random rnd = new Random();
+            for (int i = 0; i < size; i++)
+            {
+                client = new Client(
+                    "Фамилия" + rnd.Next(1, 1000).ToString(),
+                    "Имя" + rnd.Next(1, 1000).ToString(),
+                    "Отчество" + rnd.Next(1, 1000).ToString(),
+                    Math.Round((rnd.NextDouble() + 1) * 1e+10).ToString(),
+                    Math.Round((rnd.NextDouble() + 1) * 1e+9).ToString() );
+                this.clients.Add(client);
+            }            
         }
 
         /// <summary>
@@ -74,6 +100,8 @@ namespace Task_2
             string jsonString = File.ReadAllText(path);
             this.clients =  JsonSerializer.Deserialize<List<Client>>(jsonString);            
         }
+
+        
 
 
 
