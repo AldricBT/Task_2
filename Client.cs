@@ -55,5 +55,15 @@ namespace Task_2
             this.phone = phone;
             this.passport = passport;
         }
+
+        public Client()
+        {
+            Random rnd = new Random();
+            this.lastname = "Фамилия_" + rnd.Next(0,100).ToString();
+            this.name = "Имя_" + rnd.Next(0, 100).ToString();
+            this.patronymic = "Отчество_" + rnd.Next(0, 100).ToString(); ;
+            this.phone = Math.Round(((rnd.NextDouble()) * 1e+11)).ToString();
+            this.passport = Math.Round(((rnd.NextDouble()) * 1e+10)).ToString();
+        }
     }
 }

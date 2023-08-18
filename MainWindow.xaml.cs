@@ -20,14 +20,16 @@ namespace Task_2
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        Client client = new Client("Иванов", "Иван", "Иванович", "89001112223", "5050123456");
-
+        
+        private RepositoryOfClients clients;
+                
+        
         public MainWindow()
-        {
-            
+        {   
             InitializeComponent();
-            
+            clients = new RepositoryOfClients("clients.json");
+            clients.Load();
+            RefreshInfo();
         }
 
         private void phoneEdit_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -40,12 +42,14 @@ namespace Task_2
 
         private void clientView_Click(object sender, RoutedEventArgs e)
         {
-            RefreshInfo();
+            if (clients != null)
+                RefreshInfo();
         }
 
         private void chooseWorker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshInfo();
+            if (clients != null)
+                RefreshInfo();
         }
 
         /// <summary>
@@ -59,6 +63,12 @@ namespace Task_2
             patronymic.Content = worker.Patronymic;
             phone.Content = worker.Phone;
             passport.Content = worker.Passport;
+
+            lastnameEdit.Text = worker.Lastname;
+            nameEdit.Text = worker.Name;
+            patronymicEdit.Text = worker.Patronymic;
+            phoneEdit.Text = worker.Phone;
+            passportEdit.Text = worker.Passport;
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
@@ -78,11 +88,11 @@ namespace Task_2
             IWorker worker;
             if (chooseWorker.SelectedValue.ToString() == "Консультант")
             {
-                worker = new Consultant(client);
+                worker = new Consultant(clients.Clients[0]);
             }
             else
             {
-                worker = new Manager(client);
+                worker = new Manager(clients.Clients[0]);
             }
             return worker;
         }
