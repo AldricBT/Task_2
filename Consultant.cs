@@ -40,7 +40,8 @@ namespace Task_3
             get { return client.Phone; }
             set
             {
-                if (Math.Floor(Math.Log10(Int64.Parse(value)) + 1) == 11) client.Phone = value;
+                if ((!string.IsNullOrEmpty(value))&&(Math.Floor(Math.Log10(Int64.Parse(value)) + 1) == 11))
+                    client.Phone = value;
             }
         }
 
@@ -59,6 +60,29 @@ namespace Task_3
             set { }
         }
 
+        public DateTime EditTime
+        { 
+            get { return client.EditTime; }
+            set { client.EditTime = DateTime.Now; } 
+        }
+
+        public string EditData
+        {
+            get { return client.EditData; }
+            set { client.EditData = value; }
+        }
+
+        public string EditType
+        {
+            get { return client.EditType; }
+            set { client.EditType = value; }
+        }
+
+        public string EditWho
+        {
+            get { return client.EditWho; }
+            set {  client.EditWho = value; }
+        }
         
     }
 }

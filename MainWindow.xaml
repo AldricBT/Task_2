@@ -5,42 +5,118 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Данные клиентов" Height="420" Width="720" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Фамилия:" HorizontalAlignment="Left" Height="28" Margin="27,170,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Имя:" HorizontalAlignment="Left" Height="28" Margin="27,198,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Отчество:" HorizontalAlignment="Left" Height="28" Margin="27,226,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Телефон:" HorizontalAlignment="Left" Height="28" Margin="27,254,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Паспорт:" HorizontalAlignment="Left" Height="28" Margin="27,282,0,0" VerticalAlignment="Top" Width="70"/>
-        <TextBox x:Name="lastnameEdit" HorizontalAlignment="Left" Height="28" Margin="97,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:Name="nameEdit" HorizontalAlignment="Left" Height="28" Margin="97,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:Name="patronymicEdit" HorizontalAlignment="Left" Height="28" Margin="97,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:Name="phoneEdit" HorizontalAlignment="Left" Height="28" Margin="97,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" MaxLength="11" PreviewTextInput="phoneEdit_PreviewTextInput"/>
-        <TextBox x:Name="passportEdit" HorizontalAlignment="Left" Height="28" Margin="97,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
-        <Button x:Name="editButton" Content="Внести изменения" HorizontalAlignment="Left" Margin="337,226,0,0" VerticalAlignment="Top" Height="28" Width="120" Click="editButton_Click"/>
-        <Label Content="Фамилия:" HorizontalAlignment="Left" Height="28" Margin="535,170,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Имя:" HorizontalAlignment="Left" Height="28" Margin="535,198,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Отчество:" HorizontalAlignment="Left" Height="28" Margin="535,226,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Телефон:" HorizontalAlignment="Left" Height="28" Margin="535,254,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="Паспорт:" HorizontalAlignment="Left" Height="28" Margin="535,283,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label x:Name="lastname" Content="" HorizontalAlignment="Left" Height="28" Margin="605,170,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label x:Name="name" Content="" HorizontalAlignment="Left" Height="28" Margin="605,198,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label x:Name="patronymic" Content="" HorizontalAlignment="Left" Height="28" Margin="605,227,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label x:Name="phone" Content="" HorizontalAlignment="Left" Height="28" Margin="605,255,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label x:Name="passport" Content="" HorizontalAlignment="Left" Height="28" Margin="605,283,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="Поля для изменений" HorizontalAlignment="Left" Height="30" Margin="97,126,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="Информация о клиенте" HorizontalAlignment="Left" Height="30" Margin="530,126,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox x:Name="chooseWorker" HorizontalAlignment="Left" Margin="198,35,0,0" VerticalAlignment="Top" Width="144" Height="30" 
-                  SelectedIndex="0" SelectedValuePath="Name" SelectionChanged="chooseWorker_SelectionChanged" >
-            <TextBlock x:Name="Консультант">Консультант</TextBlock>
-            <TextBlock x:Name="Менеджер">Менеджер</TextBlock>
-        </ComboBox>
-        <Label Content="Авторизироваться как:" HorizontalAlignment="Left" Height="30" Margin="27,35,0,0" VerticalAlignment="Top" Width="140"/>
-        <Label x:Name="inputMessage" Content="" HorizontalAlignment="Left" Margin="347,35,0,0" VerticalAlignment="Top" Height="30" Width="290"/>
-        <Label Content="Просмотр данных клиента:" HorizontalAlignment="Left" Height="30" Margin="27,79,0,0" VerticalAlignment="Top" Width="162"/>
-        <ComboBox x:Name="chooseClient" HorizontalAlignment="Left" Margin="198,80,0,0" VerticalAlignment="Top" Width="259" Height="30" 
-            SelectedIndex="0" SelectedValuePath="Name" SelectionChanged="chooseClient_SelectionChanged" >            
-        </ComboBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"  Orientation="Horizontal">
+            <Label Content="Авторизироваться как:"
+                    Height="30" Margin="5,0,0,0" VerticalAlignment="Center" Width="140"/>
+            <ComboBox x:Name="chooseWorker" HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center" 
+                      Width="140" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                      SelectedIndex="0" SelectedValuePath="Name" SelectionChanged="chooseWorker_SelectionChanged" >
+                <TextBlock x:Name="Консультант">Консультант</TextBlock>
+                <TextBlock x:Name="Менеджер">Менеджер</TextBlock>
+            </ComboBox>
+            <Label x:Name="inputMessage" Content=""
+                    Margin="5,0,0,0" VerticalAlignment="Center" Height="30" Width="290"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal">
+            <Label Content="Просмотр данных клиента:" Grid.Row="2"
+                   HorizontalAlignment="Left" Height="30" Margin="5,0,0,0" VerticalAlignment="Center" Width="162"/>
+            <ComboBox x:Name="chooseClient" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" 
+                      Width="259" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                      SelectedIndex="0" SelectedValuePath="Name" SelectionChanged="chooseClient_SelectionChanged" Grid.Row="2" >
+            </ComboBox>
+        </StackPanel>
+
+        <Label Content="Поля для изменений" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+               HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Center" Width="150" />
+        <Label Content="Информация о клиенте" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"
+               HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Center" Width="150" />
+
+
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <Label Content="Фамилия:" HorizontalAlignment="Left" Height="28" Margin="5,0,0,0" VerticalAlignment="Top" Width="70" Grid.Row="2"/>
+            <Label Content="Имя:" HorizontalAlignment="Left" Height="28" Margin="5,0,0,0" VerticalAlignment="Top" Width="70" Grid.Row="2"/>
+            <Label Content="Отчество:" HorizontalAlignment="Left" Height="28" Margin="5,0,0,0" VerticalAlignment="Center" Width="70" Grid.Row="2"/>
+            <Label Content="Телефон:" HorizontalAlignment="Left" Height="28" Margin="5,0,0,0" VerticalAlignment="Top" Width="70" Grid.Row="2"/>
+            <Label Content="Паспорт:" HorizontalAlignment="Left" Height="28" Margin="5,0,0,0" VerticalAlignment="Top" Width="70" Grid.Row="2"/>            
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <TextBox x:Name="lastnameEdit" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" TextWrapping="Wrap" 
+                     Text="" VerticalAlignment="Top" Width="200" Grid.Row="2"/>
+            <TextBox x:Name="nameEdit" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" TextWrapping="Wrap" 
+                     Text="" VerticalAlignment="Top" Width="200" Grid.Row="2"/>
+            <TextBox x:Name="patronymicEdit" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" TextWrapping="Wrap" 
+                     Text="" VerticalAlignment="Center" Width="200" Grid.Row="2"/>
+            <TextBox x:Name="phoneEdit" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" TextWrapping="Wrap" 
+                     Text="" VerticalAlignment="Top" Width="200" MaxLength="11" PreviewTextInput="phoneEdit_PreviewTextInput" Grid.Row="2"/>
+            <TextBox x:Name="passportEdit" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" TextWrapping="Wrap" 
+                     Text="" VerticalAlignment="Top" Width="200" MaxLength="10" Grid.Row="2"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="2">
+            <Button x:Name="editButton" Content="Внести изменения" 
+                    HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="28" Width="120" Click="editButton_Click" />
+            <Button x:Name="addButton" Content="Добавить" 
+        HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="28" Width="120" Click="addButton_Click" />
+        </StackPanel>
+        
+        
+        <StackPanel Grid.Row="3" Grid.Column="3">
+            <Label Content="Фамилия:" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70"/>
+            <Label Content="Имя:" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70" />
+            <Label Content="Отчество:" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Center" Width="70"/>
+            <Label Content="Телефон:" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70"/>
+            <Label Content="Паспорт:" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70"/>
+            <Label Content="Изменил: " HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70" />
+            <Label Content="Тип: " HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70" />
+            <Label Content="Что: " HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70" />
+            <Label Content="Время: " HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="70" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="4">
+            <Label x:Name="lastname" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" 
+                   Width="200" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"/>
+            <Label x:Name="name" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" 
+                   Width="200" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"/>
+            <Label x:Name="patronymic" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Center"
+                   Width="200" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"/>
+            <Label x:Name="phone" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" 
+                   Width="200" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"/>
+            <Label x:Name="passport" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top"
+                   Width="200" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"/>
+            <Label x:Name="editWho" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+            <Label x:Name="editType" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+            <Label x:Name="editData" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+            <Label x:Name="editTime" Content="" HorizontalAlignment="Left" Height="28" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+        </StackPanel>
+        
+        
+        
+        
+        
+        
+
+
+
+
+
 
     </Grid>
 </Window>

@@ -64,23 +64,78 @@ namespace Task_3
             patronymicEdit.Text = worker.Patronymic;
             phoneEdit.Text = worker.Phone;
             passportEdit.Text = worker.Passport;
+            editTime.Content = worker.EditTime.ToString("dd.MM.yyyy HH:mm");
+            editWho.Content = worker.EditWho;
+            editType.Content = worker.EditType;
+            editData.Content = worker.EditData;
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            IWorker worker = GetWorker();
-            worker.Lastname = lastnameEdit.Text;
-            worker.Name = nameEdit.Text;
-            worker.Patronymic = patronymicEdit.Text;
-            worker.Phone = phoneEdit.Text;
-            worker.Passport = passportEdit.Text;
-
+            ChangeInfo();
             RefreshClientComboBox();
 
             clients.Save();
             RefreshInfo();
         }
 
+        private void ChangeInfo()
+        {
+            IWorker worker = GetWorker();
+            if (IsInfoChanged(worker))
+            {
+                worker.Lastname = lastnameEdit.Text;
+                worker.Name = nameEdit.Text;
+                worker.Patronymic = patronymicEdit.Text;
+                if ((!string.IsNullOrEmpty(phoneEdit.Text.ToString())) && 
+                    (Math.Floor(Math.Log10(Int64.Parse(phoneEdit.Text.ToString())) + 1) == 11))
+                    worker.Phone = phoneEdit.Text;
+                else
+                    MessageBox.Show("Неверный номер телефона!", "Внимание", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                worker.Passport = passportEdit.Text;
+            }
+            else            
+                MessageBox.Show("Вы не изменили данные!","Внимание", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                
+        }
+
+        /// <summary>
+        /// Определяет изменены ли данные и если изменены записывает их в свойство EditData
+        /// </summary>
+        /// <param name="worker">Экземпляр работника</param>
+        /// <returns></returns>
+        private bool IsInfoChanged(IWorker worker)
+        {
+            if ((worker.Lastname != lastnameEdit.Text) || (worker.Name != nameEdit.Text) ||
+                    (worker.Patronymic != patronymicEdit.Text) || (worker.Phone != phoneEdit.Text) ||
+                    (worker.Passport != passportEdit.Text) && (string.IsNullOrEmpty(phoneEdit.Text)))
+            {
+                if (worker is Consultant)
+                    worker.EditWho = "Консультант";
+                else
+                    worker.EditWho = "Менеджер";
+
+                worker.EditData = "";
+                if ((worker.Lastname != lastnameEdit.Text) ||
+                    (worker.Name != nameEdit.Text) || (worker.Patronymic != patronymicEdit.Text))
+                    worker.EditData += "ФИО ";
+                if (worker.Phone != phoneEdit.Text)
+                    worker.EditData += "Номер ";
+                if (worker.Passport != passportEdit.Text)
+                    worker.EditData += "Паспорт ";
+
+                worker.EditTime = DateTime.Now;
+
+                worker.EditType = "Изменение";
+                return true;
+            }
+            else
+                return false;
+            
+                
+        }
         private IWorker GetWorker()
         {
             IWorker worker;
@@ -91,7 +146,8 @@ namespace Task_3
                 nameEdit.IsReadOnly= true;
                 patronymicEdit.IsReadOnly = true;
                 passportEdit.IsReadOnly = true;
-                inputMessage.Content = "Вы можете изменять только телефон!";                
+                inputMessage.Content = "Вы можете изменять только телефон!";
+                addButton.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -101,6 +157,7 @@ namespace Task_3
                 patronymicEdit.IsReadOnly = false;
                 passportEdit.IsReadOnly = false;
                 inputMessage.Content = "";
+                addButton.Visibility = Visibility.Visible;
             }
             return worker;
         }
@@ -124,6 +181,28 @@ namespace Task_3
         {
             if (chooseClient.SelectedIndex != -1)
                 RefreshInfo();
+        }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (clients.Clients.Exists(c => c.Phone == phoneEdit.Text))
+                MessageBox.Show("Клиент с таким номером уже есть в базе!", "Внимание", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            else if(clients.Clients.Exists(c => c.Passport == passportEdit.Text))
+                MessageBox.Show("Клиент с таким паспортом уже есть в базе!", "Внимание", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            else
+            {
+                clients.Add(new Client(
+                    lastnameEdit.Text,
+                    nameEdit.Text,
+                    patronymicEdit.Text,
+                    phoneEdit.Text,
+                    passportEdit.Text));
+                chooseClient.Items.Add(clients.Clients[clients.Clients.Count() - 1]);
+                chooseClient.SelectedIndex = clients.Clients.Count() - 1;
+            }
+            
         }
     }
 }

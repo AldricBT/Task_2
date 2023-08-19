@@ -49,5 +49,28 @@ namespace Task_3
             set { client.Passport = value; }
         }
 
+        public DateTime EditTime
+        {
+            get { return client.EditTime; }
+            set { client.EditTime = DateTime.Now; }
+        }
+
+        public string EditData
+        {
+            get { return client.EditData; }
+            set { client.EditData = value; }
+        }
+
+        public string EditType
+        {
+            get { return client.EditType; }
+            set { client.EditType = value; }
+        }
+
+        public string EditWho
+        {
+            get { return client.EditWho; }
+            set { client.EditWho = "Менеджер"; }
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace Task_3
         public List<Client> Clients
         {
             get { return clients; }
-            set { clients = value; }
+            //set { clients = value; }
         }
 
         /// <summary>
@@ -58,18 +58,16 @@ namespace Task_3
                 clients[index] = clientNew;
         }
 
+        /// <summary>
+        /// Создание базы случайных клиентов
+        /// </summary>
+        /// <param name="size">Количество клиентов в базе</param>
         public void CreateRandomDB(int size) 
         {
             Client client;
-            Random rnd = new Random();
             for (int i = 0; i < size; i++)
             {
-                client = new Client(
-                    "Фамилия" + rnd.Next(1, 1000).ToString(),
-                    "Имя" + rnd.Next(1, 1000).ToString(),
-                    "Отчество" + rnd.Next(1, 1000).ToString(),
-                    Math.Round((rnd.NextDouble() + 1) * 1e+10).ToString(),
-                    Math.Round((rnd.NextDouble() + 1) * 1e+9).ToString() );
+                client = new Client();
                 this.clients.Add(client);
             }            
         }
