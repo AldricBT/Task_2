@@ -7,7 +7,7 @@ using System.Text.Json;
 using Microsoft.Win32;
 using System.IO;
 
-namespace Task_2
+namespace Task_3
 {
     internal class RepositoryOfClients
     {

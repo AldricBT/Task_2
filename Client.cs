@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task_2
+namespace Task_3
 {
     /// <summary>
     /// Класс клиента для хранения его данных
