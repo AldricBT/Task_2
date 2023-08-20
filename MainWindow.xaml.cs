@@ -74,7 +74,6 @@ namespace Task_3
         {
             ChangeInfo();
             RefreshClientComboBox();
-
             clients.Save();
             RefreshInfo();
         }
@@ -87,12 +86,9 @@ namespace Task_3
                 worker.Lastname = lastnameEdit.Text;
                 worker.Name = nameEdit.Text;
                 worker.Patronymic = patronymicEdit.Text;
-                if ((!string.IsNullOrEmpty(phoneEdit.Text.ToString())) && 
-                    (Math.Floor(Math.Log10(Int64.Parse(phoneEdit.Text.ToString())) + 1) == 11))
-                    worker.Phone = phoneEdit.Text;
-                else
-                    MessageBox.Show("Неверный номер телефона!", "Внимание", MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
+                worker.Phone = phoneEdit.Text;
+               
+                    
                 worker.Passport = passportEdit.Text;
             }
             else            
@@ -108,9 +104,9 @@ namespace Task_3
         /// <returns></returns>
         private bool IsInfoChanged(IWorker worker)
         {
-            if ((worker.Lastname != lastnameEdit.Text) || (worker.Name != nameEdit.Text) ||
+            if (((worker.Lastname != lastnameEdit.Text) || (worker.Name != nameEdit.Text) ||
                     (worker.Patronymic != patronymicEdit.Text) || (worker.Phone != phoneEdit.Text) ||
-                    (worker.Passport != passportEdit.Text) && (string.IsNullOrEmpty(phoneEdit.Text)))
+                    (worker.Passport != passportEdit.Text)) && (phoneEdit.Text.Length == 11))
             {
                 if (worker is Consultant)
                     worker.EditWho = "Консультант";
@@ -131,11 +127,12 @@ namespace Task_3
                 worker.EditType = "Изменение";
                 return true;
             }
-            else
-                return false;
-            
-                
+            else if (phoneEdit.Text.Length < 11)
+                MessageBox.Show("Неверный номер телефона!", "Внимание", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            return false;
         }
+
         private IWorker GetWorker()
         {
             IWorker worker;
@@ -191,6 +188,9 @@ namespace Task_3
             else if(clients.Clients.Exists(c => c.Passport == passportEdit.Text))
                 MessageBox.Show("Клиент с таким паспортом уже есть в базе!", "Внимание", MessageBoxButton.OK,
                     MessageBoxImage.Warning);
+            else if(phoneEdit.Text.Length < 11)
+                MessageBox.Show("Неверно введен номер телефона!", "Внимание", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
             else
             {
                 clients.Add(new Client(
@@ -201,6 +201,7 @@ namespace Task_3
                     passportEdit.Text));
                 chooseClient.Items.Add(clients.Clients[clients.Clients.Count() - 1]);
                 chooseClient.SelectedIndex = clients.Clients.Count() - 1;
+                clients.Save();
             }
             
         }
